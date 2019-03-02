@@ -1,0 +1,189 @@
+<!DOCTYPE HTML>
+
+<html>
+<link rel="stylesheet" href="style.css">
+<link href="https://fonts.googleapis.com/css?family=Karla:400,700" rel="stylesheet">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function (e) {
+      var ws = new WebSocket("ws://stocks.mnet.website");
+      ws.onopen = function () {
+        // Web Socket is connected, send data using send()
+      };
+
+      ws.onmessage = function (evt) {
+        $.each(JSON.parse(evt.data), function (no, data) {
+          $("#" + data[0]).closest('.flexbox').removeClass("success loss");
+          if (($("#" + data[0] + "First").text()) == "") {
+            $("#" + data[0] + "First").text(data[1].toFixed(3));
+          }
+          if (document.getElementById(data[0] + "First").innerHTML) {
+            var percentcal = parseFloat(data[1] - document.getElementById(data[0] + "First").innerHTML).toFixed(3);
+            if (percentcal == 0) {
+              $("#" + data[0] + "Percent").text("-");
+            }
+            else if (percentcal > 0) {
+              $("#" + data[0] + "Percent").text("+" + percentcal);
+            }
+            else {
+              $("#" + data[0] + "Percent").text(percentcal);
+            }
+          }
+          if (($("#" + data[0]).text()) > data[1]) {
+            $("#" + data[0]).closest('.flexbox').addClass("loss");
+
+          }
+          else {
+            $("#" + data[0]).closest('.flexbox').addClass("success");
+
+          }
+          $("#" + data[0]).text(data[1].toFixed(3));
+          const start = (document.getElementById(data[0] + "time").innerHTML).toLocaleString();
+          const end = new Date().toLocaleTimeString();
+          if (document.getElementById(data[0] + "time").innerHTML) {
+            var numb = start.match(/\d/g);
+            numb = numb.join("");
+            var numb1 = end.match(/\d/g);
+            numb1 = numb1.join("");
+            const diff = numb1 - numb;
+            $("#" + data[0] + "Last").text(diff + " seconds ago");
+          }
+          $("#" + data[0] + "time").text(new Date().toLocaleTimeString());
+        });
+      };
+      ws.onclose = function () {
+        // websocket is closed.
+        alert("Connection is closed...");
+      };
+    })
+
+  </script>
+
+</head>
+
+<body>
+  <h1>Live Stock Rate</h1>
+  <div class="masterbox">
+    <div class="flexbox">
+      <div>StockName</div>
+      <div>Current Price</div>
+      <div>Difference</div>
+      <div>Updated at</div>
+      <div>Updated After</div>
+      <div>Intial Price</div>
+    </div>
+    <div class="flexbox">
+      <div>EVI</div>
+      <div id="evi"></div>
+      <div id="eviPercent"></div>
+      <div id="evitime"></div>
+      <div id="eviLast"></div>
+      <div id="eviFirst"></div>
+    </div>
+    <div class="flexbox">
+      <div>goog</div>
+      <div id="goog"></div>
+      <div id="googPercent"></div>
+      <div id="googtime"></div>
+      <div id="googLast"></div>
+      <div id="googFirst"></div>
+    </div>
+    <div class="flexbox">
+      <div>aapl</div>
+      <div id="aapl"></div>
+      <div id="aaplPercent"></div>
+      <div id="aapltime"></div>
+      <div id="aaplLast"></div>
+      <div id="aaplFirst"></div>
+    </div>
+    <div class="flexbox">
+      <div>intc</div>
+      <div id="intc"></div>
+      <div id="intcPercent"></div>
+      <div id="intctime"></div>
+      <div id="intcLast"></div>
+      <div id="intcFirst"></div>
+    </div>
+    <div class="flexbox">
+      <div>tck</div>
+      <div id="tck"></div>
+      <div id="tckPercent"></div>
+      <div id="tcktime"></div>
+      <div id="tckLast"></div>
+      <div id="tckFirst"></div>
+    </div>
+    <div class="flexbox">
+      <div>yhoo</div>
+      <div id="yhoo"></div>
+      <div id="yhooPercent"></div>
+      <div id="yhootime"></div>
+      <div id="yhooLast"></div>
+      <div id="yhooFirst"></div>
+    </div>
+    <div class="flexbox">
+      <div>eva</div>
+      <div id="eva"></div>
+      <div id="evaPercent"></div>
+      <div id="evatime"></div>
+      <div id="evaLast"></div>
+      <div id="evaFirst"></div>
+    </div>
+    <div class="flexbox">
+      <div>lnkd</div>
+      <div id="lnkd"></div>
+      <div id="lnkdPercent"></div>
+      <div id="lnkdtime"></div>
+      <div id="lnkdLast"></div>
+      <div id="lnkdFirst"></div>
+    </div>
+    <div class="flexbox">
+      <div>msft</div>
+      <div id="msft"></div>
+      <div id="msftPercent"></div>
+      <div id="msfttime"></div>
+      <div id="msftLast"></div>
+      <div id="msftFirst"></div>
+    </div>
+    <div class="flexbox">
+      <div>mu</div>
+      <div id="mu"></div>
+      <div id="muPercent"></div>
+      <div id="mutime"></div>
+      <div id="muLast"></div>
+      <div id="muFirst"></div>
+    </div>
+    <div class="flexbox">
+      <div>ebr</div>
+      <div id="ebr"></div>
+      <div id="ebrPercent"></div>
+      <div id="ebrtime"></div>
+      <div id="ebrLast"></div>
+      <div id="ebrFirst"></div>
+    </div>
+    <div class="flexbox">
+      <div>aks</div>
+      <div id="aks"></div>
+      <div id="aksPercent"></div>
+      <div id="akstime"></div>
+      <div id="aksLast"></div>
+      <div id="aksFirst"></div>
+    </div>
+    <div class="flexbox">
+      <div>shld</div>
+      <div id="shld"></div>
+      <div id="shldPercent"></div>
+      <div id="shldtime"></div>
+      <div id="shldLast"></div>
+      <div id="shldFirst"></div>
+    </div>
+
+
+  </div>
+</body>
+
+</html>
