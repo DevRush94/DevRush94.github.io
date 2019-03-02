@@ -5,88 +5,88 @@
 <link href="https://fonts.googleapis.com/css?family=Karla:400,700" rel="stylesheet">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-  <script type="text/javascript">
-    $(document).ready(function (e) {
-      var ws = new WebSocket("ws://stocks.mnet.website");
-      ws.onopen = function () {
-        // Web Socket is connected, send data using send()
-      };
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function (e) {
+			var ws = new WebSocket("ws://stocks.mnet.website");
+			ws.onopen = function () {
+				// Web Socket is connected, send data using send()
+			};
 
-      ws.onmessage = function (evt) {
-        $.each(JSON.parse(evt.data), function (no, data) {
-          console.log(document.getElementById(data[0]) != null, document.getElementById(data[0]))
-          if ($("#" + data[0]).length == 0) {
-            var namevar = data[0];
-            var Percentvar = data[0] + "Percent"
-            var timevar = data[0] + "time";
-            var lastvar = data[0] + "Last";
-            var firstvar = data[0] + "First";
-            $('.masterbox').append("<div class='flexbox'><div>" + namevar + "</div><div id=" + firstvar + "></div><div id=" + namevar + "></div><div id=" + Percentvar + "></div><div id=" + lastvar + "></div><div id=" + timevar + "></div></div>");
-          }
-          $("#" + data[0]).closest('.flexbox').removeClass("success loss");
-          if (($("#" + data[0] + "First").text()) == "") {
-            $("#" + data[0] + "First").text(data[1].toFixed(3));
-          }
-          if (document.getElementById(data[0] + "First").innerHTML) {
-            var percentcal = parseFloat(data[1] - document.getElementById(data[0] + "First").innerHTML).toFixed(3);
-            if (percentcal == 0) {
-              $("#" + data[0] + "Percent").text("-");
-            }
-            else if (percentcal > 0) {
-              $("#" + data[0] + "Percent").text("+" + percentcal);
-            }
-            else {
-              $("#" + data[0] + "Percent").text(percentcal);
-            }
-          }
-          if (($("#" + data[0]).text()) > data[1]) {
-            $("#" + data[0]).closest('.flexbox').addClass("loss");
-          }
-          else {
-            $("#" + data[0]).closest('.flexbox').addClass("success");
-          }
-          $("#" + data[0]).text(data[1].toFixed(3));
-          const start = (document.getElementById(data[0] + "time").innerHTML).toLocaleString();
-          const end = new Date().toLocaleTimeString();
-          if (document.getElementById(data[0] + "time").innerHTML) {
-            var numb = start.match(/\d/g);
-            numb = numb.join("");
-            var numb1 = end.match(/\d/g);
-            numb1 = numb1.join("");
-            const diff = numb1 - numb;
-            $("#" + data[0] + "Last").text(diff + " seconds ago");
-          }
-          $("#" + data[0] + "time").text(new Date().toLocaleTimeString());
-        });
-      };
-      ws.onclose = function () {
-        // websocket is closed.
-        alert("Connection is closed...");
-      };
-    })
+			ws.onmessage = function (evt) {
+				$.each(JSON.parse(evt.data), function (no, data) {
+					console.log(document.getElementById(data[0]) != null, document.getElementById(data[0]))
+					if ($("#" + data[0]).length == 0) {
+						var namevar = data[0];
+						var Percentvar = data[0] + "Percent"
+						var timevar = data[0] + "time";
+						var lastvar = data[0] + "Last";
+						var firstvar = data[0] + "First";
+						$('.masterbox').append("<div class='flexbox'><div>" + namevar + "</div><div id=" + firstvar + "></div><div id=" + namevar + "></div><div id=" + Percentvar + "></div><div id=" + lastvar + "></div><div id=" + timevar + "></div></div>");
+					}
+					$("#" + data[0]).closest('.flexbox').removeClass("success loss");
+					if (($("#" + data[0] + "First").text()) == "") {
+						$("#" + data[0] + "First").text(data[1].toFixed(3));
+					}
+					if (document.getElementById(data[0] + "First").innerHTML) {
+						var percentcal = parseFloat(data[1] - document.getElementById(data[0] + "First").innerHTML).toFixed(3);
+						if (percentcal == 0) {
+							$("#" + data[0] + "Percent").text("-");
+						}
+						else if (percentcal > 0) {
+							$("#" + data[0] + "Percent").text("+" + percentcal);
+						}
+						else {
+							$("#" + data[0] + "Percent").text(percentcal);
+						}
+					}
+					if (($("#" + data[0]).text()) > data[1]) {
+						$("#" + data[0]).closest('.flexbox').addClass("loss");
+					}
+					else {
+						$("#" + data[0]).closest('.flexbox').addClass("success");
+					}
+					$("#" + data[0]).text(data[1].toFixed(3));
+					const start = (document.getElementById(data[0] + "time").innerHTML).toLocaleString();
+					const end = new Date().toLocaleTimeString();
+					if (document.getElementById(data[0] + "time").innerHTML) {
+						var numb = start.match(/\d/g);
+						numb = numb.join("");
+						var numb1 = end.match(/\d/g);
+						numb1 = numb1.join("");
+						const diff = numb1 - numb;
+						$("#" + data[0] + "Last").text(diff + " seconds ago");
+					}
+					$("#" + data[0] + "time").text(new Date().toLocaleTimeString());
+				});
+			};
+			ws.onclose = function () {
+				// websocket is closed.
+				alert("Connection is closed...");
+			};
+		})
 
-  </script>
+	</script>
 
 </head>
 
 <body>
-  <h1>Live Stock Rate</h1>
-  <div class="masterbox">
-    <div class="flexbox">
-      <div>Name</div>
-      <div>Opening Price</div>
-      <div>Current Price</div>
-      <div>Difference</div>
-      <div>Time elapsed</div>
-      <div>Time</div>
-    </div>
+	<h1>Live Stock Rate</h1>
+	<div class="masterbox">
+		<div class="flexbox">
+			<div>Name</div>
+			<div>Opening Price</div>
+			<div>Current Price</div>
+			<div>Difference</div>
+			<div>Time elapsed</div>
+			<div>Time</div>
+		</div>
 
 
-  </div>
+	</div>
 </body>
 
 </html>
