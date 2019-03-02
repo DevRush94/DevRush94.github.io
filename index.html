@@ -25,7 +25,7 @@
             var timevar = data[0] + "time";
             var lastvar = data[0] + "Last";
             var firstvar = data[0] + "First";
-            $('.masterbox').append("<div class='flexbox'><div>" + namevar + "</div><div id=" + namevar + "></div><div id=" + Percentvar + "></div><div id=" + timevar + "></div><div id=" + lastvar + "></div><div id=" + firstvar + "></div></div>");
+            $('.masterbox').append("<div class='flexbox'><div>" + namevar + "</div><div id=" + firstvar + "></div><div id=" + namevar + "></div><div id=" + Percentvar + "></div><div id=" + lastvar + "></div><div id=" + timevar + "></div></div>");
           }
           $("#" + data[0]).closest('.flexbox').removeClass("success loss");
           if (($("#" + data[0] + "First").text()) == "") {
@@ -76,7 +76,14 @@
 <body>
   <h1>Live Stock Rate</h1>
   <div class="masterbox">
-
+    <div class="flexbox">
+      <div>Name</div>
+      <div>Opening Price</div>
+      <div>Current Price</div>
+      <div>Difference</div>
+      <div>Time elapsed</div>
+      <div>Time</div>
+    </div>
 
 
   </div>
