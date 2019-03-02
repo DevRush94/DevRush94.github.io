@@ -7,7 +7,7 @@ body { display: flex; flex-direction: column; align-items: center; justify-conte
 .flexbox:hover::after { background-color: rgba(225, 241, 255, .9); } 
 .flexbox div { flex: 1; } 
 .flexbox div:nth-child(1) { text-transform: uppercase } 
-.flexbox div:nth-last-child(1) { flex: .5 } 
+.flexbox div:nth-last-child(1) { font-size: 85%; flex: .5; } 
 .flexbox span { display: inline-block; padding: 0 10px } 
 .flexbox::before { transition: .5s all ease-in-out } 
 .masterbox { min-width: 60%; margin:20px auto; background-color: white; padding: 25px; border-radius: 10px; max-width: 980px; box-shadow: 0px 10px 13px -6px rgba(0, 0, 0, 0.08), 0px 20px 31px 3px rgba(0, 0, 0, 0.09), 0px 8px 20px 7px rgba(0, 0, 0, 0.02); } 
@@ -19,15 +19,17 @@ body { display: flex; flex-direction: column; align-items: center; justify-conte
 .loss::after { background-color: rgba(255, 0, 0, .2); } 
 .success div:nth-child(3):before { content: ''; border-left: 10px solid transparent; border-right: 10px solid transparent; border-bottom: 10px solid rgba(0, 128, 0, 1); position: absolute; top: 40%; margin-left: -25px; } 
 .loss div:nth-child(3):before { content: ''; border-left: 10px solid transparent; border-right: 10px solid transparent; border-top: 10px solid rgba(255, 0, 0, 1); position: absolute; top: 40%; margin-left: -25px; } 
-@media only screen and (max-width: 1024px){
+@media only screen and (max-width: 1280px){
  .masterbox { min-width: 75%; } 
+ }@media only screen and (max-width: 1080px){
+ .masterbox { min-width: 85%; } 
  }
-@media only screen and (max-width: 768px) { body { overflow: auto; flex-direction: column; } 
+@media only screen and (max-width: 768px) { body { overflow: auto; flex-direction: column; height: auto; background-color: #f5eef8; } 
 .flexbox { flex-direction: column; align-items: flex-start; } 
 .flexbox:nth-child(1) { display: none } 
-.loss div:nth-child(2):before,.success div:nth-child(2):before { bottom: 10px; right: 10px; margin-left: 0; top:unset } 
+.loss div:nth-child(3):before,.success div:nth-child(3):before { bottom: 10px; right: 10px; margin-left: 0; top:unset } 
 .flexbox:nth-child(2) ,.flexbox:nth-child(2)::after { border-top-left-radius: 10px; border-top-right-radius: 10px; } 
 .flexbox:hover::after { background-color:inherit } 
-.flexbox:nth-last-child(2) ,.flexbox:nth-last-child(2)::after { border-radius: 0; } 
+.flexbox:nth-last-child(1) ,.flexbox:nth-last-child(2)::after { border-radius: 0; } 
 .masterbox { min-width: 80%; padding: 10px; } 
  }
