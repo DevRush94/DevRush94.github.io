@@ -18,6 +18,15 @@
 
       ws.onmessage = function (evt) {
         $.each(JSON.parse(evt.data), function (no, data) {
+          console.log(document.getElementById(data[0]) != null, document.getElementById(data[0]))
+          if ($("#" + data[0]).length == 0) {
+            var namevar = data[0];
+            var Percentvar = data[0] + "Percent"
+            var timevar = data[0] + "time";
+            var lastvar = data[0] + "Last";
+            var firstvar = data[0] + "First";
+            $('.masterbox').append("<div class='flexbox'><div>" + namevar + "</div><div id=" + namevar + "></div><div id=" + Percentvar + "></div><div id=" + timevar + "></div><div id=" + lastvar + "></div><div id=" + firstvar + "></div></div>");
+          }
           $("#" + data[0]).closest('.flexbox').removeClass("success loss");
           if (($("#" + data[0] + "First").text()) == "") {
             $("#" + data[0] + "First").text(data[1].toFixed(3));
@@ -36,11 +45,9 @@
           }
           if (($("#" + data[0]).text()) > data[1]) {
             $("#" + data[0]).closest('.flexbox').addClass("loss");
-
           }
           else {
             $("#" + data[0]).closest('.flexbox').addClass("success");
-
           }
           $("#" + data[0]).text(data[1].toFixed(3));
           const start = (document.getElementById(data[0] + "time").innerHTML).toLocaleString();
@@ -69,118 +76,7 @@
 <body>
   <h1>Live Stock Rate</h1>
   <div class="masterbox">
-    <div class="flexbox">
-      <div>StockName</div>
-      <div>Current Price</div>
-      <div>Difference</div>
-      <div>Updated at</div>
-      <div>Updated After</div>
-      <div>Intial Price</div>
-    </div>
-    <div class="flexbox">
-      <div>EVI</div>
-      <div id="evi"></div>
-      <div id="eviPercent"></div>
-      <div id="evitime"></div>
-      <div id="eviLast"></div>
-      <div id="eviFirst"></div>
-    </div>
-    <div class="flexbox">
-      <div>goog</div>
-      <div id="goog"></div>
-      <div id="googPercent"></div>
-      <div id="googtime"></div>
-      <div id="googLast"></div>
-      <div id="googFirst"></div>
-    </div>
-    <div class="flexbox">
-      <div>aapl</div>
-      <div id="aapl"></div>
-      <div id="aaplPercent"></div>
-      <div id="aapltime"></div>
-      <div id="aaplLast"></div>
-      <div id="aaplFirst"></div>
-    </div>
-    <div class="flexbox">
-      <div>intc</div>
-      <div id="intc"></div>
-      <div id="intcPercent"></div>
-      <div id="intctime"></div>
-      <div id="intcLast"></div>
-      <div id="intcFirst"></div>
-    </div>
-    <div class="flexbox">
-      <div>tck</div>
-      <div id="tck"></div>
-      <div id="tckPercent"></div>
-      <div id="tcktime"></div>
-      <div id="tckLast"></div>
-      <div id="tckFirst"></div>
-    </div>
-    <div class="flexbox">
-      <div>yhoo</div>
-      <div id="yhoo"></div>
-      <div id="yhooPercent"></div>
-      <div id="yhootime"></div>
-      <div id="yhooLast"></div>
-      <div id="yhooFirst"></div>
-    </div>
-    <div class="flexbox">
-      <div>eva</div>
-      <div id="eva"></div>
-      <div id="evaPercent"></div>
-      <div id="evatime"></div>
-      <div id="evaLast"></div>
-      <div id="evaFirst"></div>
-    </div>
-    <div class="flexbox">
-      <div>lnkd</div>
-      <div id="lnkd"></div>
-      <div id="lnkdPercent"></div>
-      <div id="lnkdtime"></div>
-      <div id="lnkdLast"></div>
-      <div id="lnkdFirst"></div>
-    </div>
-    <div class="flexbox">
-      <div>msft</div>
-      <div id="msft"></div>
-      <div id="msftPercent"></div>
-      <div id="msfttime"></div>
-      <div id="msftLast"></div>
-      <div id="msftFirst"></div>
-    </div>
-    <div class="flexbox">
-      <div>mu</div>
-      <div id="mu"></div>
-      <div id="muPercent"></div>
-      <div id="mutime"></div>
-      <div id="muLast"></div>
-      <div id="muFirst"></div>
-    </div>
-    <div class="flexbox">
-      <div>ebr</div>
-      <div id="ebr"></div>
-      <div id="ebrPercent"></div>
-      <div id="ebrtime"></div>
-      <div id="ebrLast"></div>
-      <div id="ebrFirst"></div>
-    </div>
-    <div class="flexbox">
-      <div>aks</div>
-      <div id="aks"></div>
-      <div id="aksPercent"></div>
-      <div id="akstime"></div>
-      <div id="aksLast"></div>
-      <div id="aksFirst"></div>
-    </div>
-    <div class="flexbox">
-      <div>shld</div>
-      <div id="shld"></div>
-      <div id="shldPercent"></div>
-      <div id="shldtime"></div>
-      <div id="shldLast"></div>
-      <div id="shldFirst"></div>
-    </div>
+
 
 
   </div>
